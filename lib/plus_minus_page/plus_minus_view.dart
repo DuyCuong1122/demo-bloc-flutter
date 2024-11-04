@@ -10,47 +10,50 @@ class PlusMinusView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plus Minus'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            BlocBuilder<PlusMinusBloc, PlusMinusState>(
-              builder: (context, state) {
-                return Text(
-                  '${state.value}',
-                  style: Theme.of(context).textTheme.bodyMedium,
-                );
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Bloc demo'),
+          centerTitle: true,  
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text(
+                'You have pushed the button this many times:',
+              ),
+              BlocBuilder<PlusMinusBloc, PlusMinusState>(
+                builder: (context, state) {
+                  return Text(
+                    '${state.value}',
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            FloatingActionButton(
+              onPressed: () {
+                context.read<PlusMinusBloc>().add(PlusEvent());
               },
+              tooltip: 'Increment',
+              child: const Icon(Icons.add),
+            ),
+            const SizedBox(height: 10),
+            FloatingActionButton(
+              onPressed: () {
+                context.read<PlusMinusBloc>().add(MinusEvent());
+              },
+              tooltip: 'Decrement',
+              child: const Icon(Icons.remove),
             ),
           ],
         ),
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              context.read<PlusMinusBloc>().add(PlusEvent());
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          const SizedBox(height: 10),
-          FloatingActionButton(
-            onPressed: () {
-              context.read<PlusMinusBloc>().add(MinusEvent());
-            },
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
-          ),
-        ],
       ),
     );
   }
