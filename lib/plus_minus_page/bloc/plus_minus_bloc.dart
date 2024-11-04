@@ -4,7 +4,7 @@ import 'plus_minus_event.dart';
 import 'plus_minus_state.dart';
 
 class PlusMinusBloc extends Bloc<PlusMinusEvent, PlusMinusState> {
-  PlusMinusBloc() : super(PlusMinusInitial()) {
+  PlusMinusBloc(int value) : super(PlusMinusInitial(value)) {
     on<PlusEvent>((event, emit) {
       emit(PlusMinusState(value: state.value + 1));
     });

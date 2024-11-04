@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/plus_minus_bloc.dart';
 import 'bloc/plus_minus_event.dart';
-import 'bloc/plus_minus_state.dart';
 
 class PlusMinusView extends StatelessWidget {
   const PlusMinusView({super.key});
@@ -14,7 +13,7 @@ class PlusMinusView extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Bloc demo'),
-          centerTitle: true,  
+          centerTitle: true,
         ),
         body: Center(
           child: Column(
@@ -23,14 +22,27 @@ class PlusMinusView extends StatelessWidget {
               const Text(
                 'You have pushed the button this many times:',
               ),
-              BlocBuilder<PlusMinusBloc, PlusMinusState>(
-                builder: (context, state) {
-                  return Text(
-                    '${state.value}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  );
-                },
-              ),
+              // BlocConsumer<PlusMinusBloc, PlusMinusState>(
+              //   listenWhen: (previous, current) => previous.value + current.value>10,
+              //   listener: (context, state) {
+              //     final snackBar = SnackBar(
+              //       content: Text('Value is ${state.value}'),
+              //       duration: const Duration(seconds: 1),
+              //     );
+              //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              //   },
+              //   buildWhen: (previous, current) => previous.value + current.value >20,
+              //   builder: (context, state) {
+              //     log('Value is ${state.value}');
+              //     return Text(
+              //       '${state.value}',
+              //       style: Theme.of(context).textTheme.bodyMedium,
+              //     );
+              //   },
+              // ),
+              Builder(
+                  builder: (context) => Text(
+                      context.watch<PlusMinusBloc>().state.value.toString())),
             ],
           ),
         ),

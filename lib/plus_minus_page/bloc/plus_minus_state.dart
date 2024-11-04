@@ -5,5 +5,5 @@ class PlusMinusState {
 }
 
 class PlusMinusInitial extends PlusMinusState {
-  PlusMinusInitial() : super(value: -10);
+  PlusMinusInitial(int value) : super(value: value);
 }
